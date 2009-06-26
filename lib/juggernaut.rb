@@ -99,6 +99,16 @@ module Juggernaut
       send_data(fc, true).flatten
     end
     alias show_clients_for_channel show_clients_for_channels
+    
+    def update_client(client_id, attributes)
+      fc = {
+        :command    => :query,
+        :type       => :update_client_attributes,
+        :client_id  => client_id,
+        :attributes => attributes
+      }
+      send_data(fc, true).flatten
+    end
 
     def send_data(hash, response = false)
       hash[:channels]   = Array(hash[:channels])   if hash[:channels]
